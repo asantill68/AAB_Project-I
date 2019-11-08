@@ -1,12 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<title>Train Scheduler</title>
+
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/spacelab/bootstrap.min.css">
+
+	<!--Reset css file-->
+	<!--<link rel="stylesheet" type="text/css" href="assets/css/reset.css">-->
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="https://use.fontawesome.com/abd289e58f.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+		integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
 </head>
-<body>
-    
+
+<body class="bg-secondary">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card mb-4 bg-primary border border-primary">
+					<div class="card-body text-white">
+						<h1 class="card-title text-center">Concert Locator</h1>
+						<h5 class="card-text"></h5>
+						<!--<button type="button" class="text-center btn btn-lg signIn">Sign in with Google</button>-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-4 content">
+			<div class="col-md-12">
+				<div class="card border border-primary">
+					<div class="card-header bg-primary text-white">
+						<h5>Concert Information</h5>
+					</div>
+					<div class="card-body">
+						<table class="table table-hover table-responsive-md">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">Artist<i class="fa fa-question-circle" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="The performing artist."></i></th>
+									<th scope="col">Venue <i class="fa fa-question-circle" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="The location of the performance."></i></th>
+									<th scope="col">Ticket Sales (min) <i class="fa fa-question-circle"
+											aria-hidden="true" data-toggle="tooltip" data-placement="top"
+											title="When tickets will be on sale."></i></th>
+									<th scope="col">Date/Time <i class="fa fa-question-circle" aria-hidden="true"
+											data-toggle="tooltip" data-placement="top"
+											title="Date and time of the concert."></i></th>
+
+								</tr>
+							</thead>
+							<tbody id="schedule-body">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row content">
+			<div class="col-md-12">
+				<div class="card border border-primary">
+					<div class="card-header bg-primary text-white">
+						<h5> Add Preferences and Location</h5>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="form-group">
+								<label for="genre">Genre <i class="fa fa-question-circle" aria-hidden="true"
+										data-toggle="tooltip" data-placement="top"
+										title="Genre preference."></i></label>
+								<input type="text" class="form-control" id="train-name">
+								<!-- Add a dropdown menu for Genre -->
+							</div>
+							<div class="form-group">
+								<label for="location">Zip Code <i class="fa fa-question-circle" aria-hidden="true"
+										data-toggle="tooltip" data-placement="top"
+										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+								<input type="text" class="form-control" id="destination">
+							</div>
+							<div class="form-group">
+								<label for="radius">Radius<i class="fa fa-question-circle" aria-hidden="true"
+										data-toggle="tooltip" data-placement="top"
+										title="Distance from your location that you're willing to travel."></i></label>
+								<small id="not-military-time" class="form-validation"></small>
+								<input type="text" class="form-control" id="first-train-time">
+							</div>
+
+							<p id="missing-field" class="form-validation"></p>
+							<button type="submit" class="btn btn-primary rounded" id="submit-button"
+								data-toggle="modal">Add to schedule</button>
+
+
+							<div class="modal" id="addTrain" tabindex="-1" role="dialog">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header bg-primary">
+											<h5 class="modal-title text-white">Train successfully added.</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="add-train-modal ml-3 mt-3">
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+
+						<div class="modal" id="removeTrain" tabindex="-1" role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header bg-primary">
+										<h5 class="modal-title text-white">Are you sure you want to remove this train?
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="remove-train-modal ml-3 mt-3">
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal"
+											id="remove-train-btn">Remove</button>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<script src="assets/javascript/logic.js"></script>
+
 </body>
+
 </html>
