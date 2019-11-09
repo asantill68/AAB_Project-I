@@ -11,6 +11,19 @@
 
 alert("click");
 
+var artist = $("#artist").val().trim();
+	var venue = $("#venue").val().trim();
+	var ticketSales = $("#ticket-sales").val().trim();
+	var timeDate = $("#time-date").val().trim();
 
+
+	console.log(artist);
+	console.log(venue);
+	console.log(ticketSales);
+	console.log(timeDate);
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
 
 	
