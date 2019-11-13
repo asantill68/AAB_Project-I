@@ -9,21 +9,61 @@
 // dynamically generate html content
 // post data onto the html
 
-alert("click");
-
-var artist = $("#artist").val().trim();
-	var venue = $("#venue").val().trim();
-	var ticketSales = $("#ticket-sales").val().trim();
-	var timeDate = $("#time-date").val().trim();
 
 
-	console.log(artist);
-	console.log(venue);
-	console.log(ticketSales);
-	console.log(timeDate);
+// var artist = $("#artist").val().trim();
+// 	var venue = $("#venue").val().trim();
+// 	var ticketSales = $("#ticket-sales").val().trim();
+// 	var timeDate = $("#time-date").val().trim();
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
 
+// 	console.log(artist);
+// 	console.log(venue);
+// 	console.log(ticketSales);
+// 	console.log(timeDate);
+
+//     $(function () {
+//         $('[data-toggle="tooltip"]').tooltip()
+//       })
+$("#submit-button").on('click'), function(e){
+	e.preventDefault()
+	var queryParams = {
+		classificationName: "",
+		city: "",
+		stateCode: "",
+		apiKey: "U2uyEsPGavnqxKAoaEf7KohDoHPNsEhV"
+	};
+	 
+		var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey="+queryParams.apiKey+"&classificationName="+classificationName+"&city="+city+"&stateCode"+stateCode;
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		}).then(function (response) {
+			// var genres = response.segment._embedded.genres;
+			// for (var i=0; i<genres.length; i++){
+			// 	console.log(i+": "+genres[i].name);
+			// }
+			console.log(response);
+		});
+	};
+
+	// $.ajax({
+	// 	type:"GET",
+	// 	url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=U2uyEsPGavnqxKAoaEf7KohDoHPNsEhV+&classificationName",
+	// 	async:true,
+	// 	dataType: "json",
+	// 	success: function(json) {
+	// 				console.log(json);
+	// 				// Parse the response.
+	// 				// Do other things.
+	// 			 }
+		
+	//   });
 	
+
+  // Grab text the user typed into the search input, add to the queryParams object
+//   queryParams.q = $("#search-genre")
+//     .val()
+//     .trim();
+// 	  }
+
