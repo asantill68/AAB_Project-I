@@ -1,167 +1,110 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>myTrainBuilder</title>
+// Create Global variables
+// Get API KEY for ticketmaster and google maps
+// sift through JSON data to retreive objects to attach
+// build url to query the API
+// Get AJAX call for MapQuest to get geolocation
 
-	<!--Bootstrap CDN link-->
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+//ALEX IS WORKING ON MAPQUEST API   "KEEP HERE IN CASE WE NEED TO DO SEPARATE AJAX REQUESTS"
+// $('#submit-button').on('click', function(e){
+//  	e.preventDefault();
+// 	// Create local vars to capture hard test building URL
+// 	// Location Input (locInput) can be address, zipcode, city-state, state 
+// 	var locInput = $('#locaInput').val().trim();
+// 	var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
+// 	var queryURL1 = "http://www.mapquestapi.com/geocoding/v1/address?key=" + mapQuestKey + "&location=" + locInput;
+// 		console.log(queryURL);
+// 	$.ajax({
+// 		url: queryURL1,
+// 		method: "GET"
+// 	}).done(function(response){
+// 		// Concactonate respose:
+// 		var shortCut = response.results[0].locations[0].latLng;
+// 		console.log(shortCut);
 
-	<!--Bootswatch link-->
-	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/spacelab/bootstrap.min.css">
+// 		var lati = shortCut.lat;
+// 		var long = shortCut.lng;
 
-	<!--Reset css file-->
-	<!--<link rel="stylesheet" type="text/css" href="assets/css/reset.css">-->
+// 		console.log(lati);
+// 		console.log(long);
 
-	<!--Google Fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+// 		// console.log(response.options.maxResults);
+// 		console.log(response);
+// 		// console.log(response.results[0].locations[0].latLng);
+// 		// console.log(response.results[0].locations[0].latLng.lat);
+// 		// console.log(response.results[0].locations[0].latLng.lng);
 
-	<!--External css file-->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-	<!--JQuery link-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<!--Font Awesome link-->
-	<script src="https://use.fontawesome.com/abd289e58f.js"></script>
-
-	<!--Firebase Javascript link-->
-	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
-
-	<!--Add Moment JS-->
-	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
-	<!--Bootstrap Javascript links (required for modals to work)-->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-
-	<!--Firebase UI JS and CSS for authentication-->
-	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-
-</head>
-<body class="bg-secondary">
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card mb-4 bg-primary border border-primary">
-					<div class="card-body text-white">
-				    	<h1 class="card-title text-center"><img src="assets/images/if_14_171500.svg" alt="train">myTrainBuilder</h1>
-				    	<h5 class="card-text"></h5>
-				    	<!--<button type="button" class="text-center btn btn-lg signIn">Sign in with Google</button>-->
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row mb-4 content">
-			<div class="col-md-12">
-				<div class="card border border-primary">
-					<div class="card-header bg-primary text-white">
-						<h5><img src="assets/images/if_ic_schedule_48px_352085.svg" alt="clock"> Current train schedule</h5>
-					</div>
-					<div class="card-body">
-							
-							<h5>Current time: <span id="current-time"></span></h5>
-							<table class="table table-hover table-responsive-md">
-							  <thead>
-							    <tr>
-									<th scope="col"></th>
-							    	<th scope="col">Train name <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The name of the train."></i></th>
-							    	<th scope="col">Destination <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The location to where the train is traveling to. For example, Chicago, IL."></i></th>
-							    	<th scope="col">Frequency (min) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="How often (in minutes) the train leaves."></i></th>
-							    	<th scope="col">Next arrival <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The time the next train will arrive at the destination."></i></th>
-							    	<th scope="col">Minutes away <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The number of minutes until the next train is expected to arrive at the destination."></i></th>
-							    </tr>
-							  </thead>
-							  <tbody id="schedule-body">
-							  </tbody>
-							</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row content">
-			<div class="col-md-12">
-				<div class="card border border-primary">
-					<div class="card-header bg-primary text-white">
-						<h5><img src="assets/images/if_ic_directions_train_48px_352317.svg" alt="train"> Add train</h5>
-					</div>
-					<div class="card-body">
-						<form>
-							<div class="form-group">
-						    	<label for="trainName">Train name <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The name of the train you want to add to the schedule. For example, Milwaukee Railroad."></i></label>
-						    	<input type="text" class="form-control" id="train-name" placeholder="New Haven Railroad">
-						  	</div>
-						  	<div class="form-group">
-						    	<label for="destination">Destination <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-						    	<input type="text" class="form-control" id="destination" placeholder="Boston, MA">
-						  	</div>
-						  	<div class="form-group">
-						    	<label for="firstTrainTime">First train time (HH:mm - military time) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Enter the first time that the train leaves (specify in military time)."></i></label>
-						    	<small id="not-military-time" class="form-validation"></small>
-						    	<input type="text" class="form-control" id="first-train-time" placeholder="HH:mm">
-						  	</div>
-						  	<div class="form-group">
-						    	<label for="firstTrainTime">Frequency (min) <i class="fa fa-question-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="How often (in minutes) the train leaves."></i></label>
-						    	<small id="not-a-number" class="form-validation"></small>
-						    	<input type="text" class="form-control" id="frequency" placeholder="">
-						  	</div>
-						  	<p id="missing-field" class="form-validation"></p>
-						  	<button type="submit" class="btn btn-primary rounded" id="submit-button" data-toggle="modal">Add to schedule</button>
-
-						  	<!--Confirmation modal. Appears when train is successfully added to the current schedule.-->
-						  	<div class="modal" id="addTrain" tabindex="-1" role="dialog">
-							  <div class="modal-dialog" role="document">
-							    <div class="modal-content">
-							      <div class="modal-header bg-primary">
-							        <h5 class="modal-title text-white">Train successfully added</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							        	<span aria-hidden="true">&times;</span>
-							        </button>
-							      </div>
-							      <div class="add-train-modal ml-3 mt-3">
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-						</form>
-
-						
-					  	<div class="modal" id="removeTrain" tabindex="-1" role="dialog">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header bg-primary">
-						        <h5 class="modal-title text-white">Are you sure you want to remove this train?</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						        	<span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="remove-train-modal ml-3 mt-3">
-						      </div>
-						      <div class="modal-footer">
-						      	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="remove-train-btn">Remove</button>
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-		
-					</div>
-				</div>
-			</div>
+// 		// Empty Form Values
+// 		$('#locaInput').val('');
+// 		});
 
 
-		</div>
-	</div>
+// Creat on click event from form to make URLs for 
+$('#submit-button').click(function(){
+	e.preventDefault();
+	// Create local vars to capture hard test building URL
+	// Location Input (locInput) can be address, zipcode, city-state, state 
+		var locInput = $('#locaInput').val().trim();
+		var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
+		var queryURL1 = "http://www.mapquestapi.com/geocoding/v1/address?key=" + mapQuestKey + "&location=" + locInput;
+			console.log(queryURL);
 
-<script src="assets/javascript/logic2.js"></script>
+// Multiple Ajax Request Code
+	$.when(
+		// MapQuest API Request:
+		$.ajax({
+			url: queryURL1,
+			method: 'GET',
+			success: function(data) {
+				alert('MapQuest request complete')
+			}
+		}).done(function(response1){
+			// Concactonate respose:
+				var shortCut = response.results[0].locations[0].latLng;
+			// Show in console
+				console.log(shortCut);
+			// Separate lattitude and longitude
+				var lati = shortCut.lat;
+				var long = shortCut.lng;
+			// Show in console
+				console.log(lati);
+				console.log(long);
+		}),
+		// TicketMaster API Request:
+		// $.ajax({
+		// 	url: '/echo/html/',
+		// 	success: function(data) {
+		// 		alert('request complete')
+		// 	}
+		// })
+	).then( function(){
+		alert('all complete');
+	});
+});
 
-</body>
-</html>
+// End of Ajax Request		
+
+
+// Get AJAX call for ticketmaster to get events and locations
+// Using Jquery create an onclick event listener (to retrieve user inputs)
+// create flow to manipulate data from JSON
+// dynamically generate html content
+// post data onto the html
+
+//alert("click");
+
+	// var artist = $("#artist").val().trim();
+	// var venue = $("#venue").val().trim();
+	// var ticketSales = $("#ticket-sales").val().trim();
+	// var timeDate = $("#time-date").val().trim();
+
+
+	// console.log(artist);
+	// console.log(venue);
+	// console.log(ticketSales);
+	// console.log(timeDate);
+
+    // $(function () {
+    //     $('[data-toggle="tooltip"]').tooltip()
+    //   })
+
+	

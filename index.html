@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Train Scheduler</title>
+	<title>Concert Locator</title>
 
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -98,6 +98,7 @@
 					<div class="card-header bg-primary text-white">
 						<h5> Add Preferences and Location</h5>
 					</div>
+					<!-- Input Your Preferances Section button id = "submit-button" -->
 					<div class="card-body">
 							<div class="dropdown">
 									<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Genre
@@ -112,10 +113,10 @@
 								  <br>
 						<form>
 							<div class="form-group">
-								<label for="location">Zip Code <i class="fa fa-question-circle" aria-hidden="true"
+								<label for="location">Address/City/State/Zip Code <i class="fa fa-question-circle" aria-hidden="true"
 										data-toggle="tooltip" data-placement="top"
 										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-								<input type="text" class="form-control" id="destination">
+								<input type="text" class="form-control" id="locaInput">
 							</div>
 							<div class="form-group">
 								<label for="radius">Radius<i class="fa fa-question-circle" aria-hidden="true"
@@ -127,7 +128,7 @@
 
 							<p id="missing-field" class="form-validation"></p>
 							<button type="submit" class="btn btn-primary rounded" id="submit-button"
-								data-toggle="modal">Add to schedule</button>
+								data-toggle="modal">Submit Your Preferances</button>
 
 
 							<div class="modal" id="addTrain" tabindex="-1" role="dialog">
@@ -180,8 +181,10 @@
 
 		</div>
 	</div>
-
-	<script src="assets/javascript/logic.js"></script>
+<!-- Ajax -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Link to Javascript file -->
+	<script src="assets/javascript/javascript.js"></script>
 
 </body>
 
