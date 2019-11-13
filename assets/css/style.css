@@ -1,0 +1,11 @@
+body {
+    background-image: url("https://i.imgur.com/RGzu6h0.jpg");
+}
+
+label {
+	font-weight: bold;
+}
+
+.table-header{
+	font-weight: bold;
+}
