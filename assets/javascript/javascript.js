@@ -1,110 +1,77 @@
 // Create Global variables
-// Get API KEY for ticketmaster and google maps
-// sift through JSON data to retreive objects to attach
+	// Map Quest Basic URL
+	var apiKeyMQ  = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
+	var baseURLmq = "http://www.mapquestapi.com/geocoding/v1/address?key=" + apiKeyMQ;
+
+	// TM Quest Basic URL
+	// var apiKeyTM = ' ';
+	// var apiKeyTM = ' '; 
+
+	//Search Parameters
+	// var genreInput  = ' ';
+	var lati = ' ';
+	var long = ' ';
+	var locInput 	= ' ';
+	// var radiusInput = 0;
+
 // build url to query the API
 // Get AJAX call for MapQuest to get geolocation
 
 //ALEX IS WORKING ON MAPQUEST API   "KEEP HERE IN CASE WE NEED TO DO SEPARATE AJAX REQUESTS"
-// $('#submit-button').on('click', function(e){
-//  	e.preventDefault();
-// 	// Create local vars to capture hard test building URL
-// 	// Location Input (locInput) can be address, zipcode, city-state, state 
-// 	var locInput = $('#locaInput').val().trim();
-// 	var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
-// 	var queryURL1 = "http://www.mapquestapi.com/geocoding/v1/address?key=" + mapQuestKey + "&location=" + locInput;
-// 		console.log(queryURL);
-// 	$.ajax({
-// 		url: queryURL1,
-// 		method: "GET"
-// 	}).done(function(response){
-// 		// Concactonate respose:
-// 		var shortCut = response.results[0].locations[0].latLng;
-// 		console.log(shortCut);
 
-// 		var lati = shortCut.lat;
-// 		var long = shortCut.lng;
-
-// 		console.log(lati);
-// 		console.log(long);
-
-// 		// console.log(response.options.maxResults);
-// 		console.log(response);
-// 		// console.log(response.results[0].locations[0].latLng);
-// 		// console.log(response.results[0].locations[0].latLng.lat);
-// 		// console.log(response.results[0].locations[0].latLng.lng);
-
-// 		// Empty Form Values
-// 		$('#locaInput').val('');
-// 		});
-
-
-// Creat on click event from form to make URLs for 
-$('#submit-button').click(function(){
-	e.preventDefault();
 	// Create local vars to capture hard test building URL
 	// Location Input (locInput) can be address, zipcode, city-state, state 
-		var locInput = $('#locaInput').val().trim();
-		var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
-		var queryURL1 = "http://www.mapquestapi.com/geocoding/v1/address?key=" + mapQuestKey + "&location=" + locInput;
-			console.log(queryURL);
-
-// Multiple Ajax Request Code
-	$.when(
-		// MapQuest API Request:
+	function runQueryMQ(newURLmq){
 		$.ajax({
-			url: queryURL1,
-			method: 'GET',
-			success: function(data) {
-				alert('MapQuest request complete')
-			}
-		}).done(function(response1){
-			// Concactonate respose:
-				var shortCut = response.results[0].locations[0].latLng;
-			// Show in console
-				console.log(shortCut);
-			// Separate lattitude and longitude
-				var lati = shortCut.lat;
-				var long = shortCut.lng;
-			// Show in console
-				console.log(lati);
-				console.log(long);
-		}),
-		// TicketMaster API Request:
-		// $.ajax({
-		// 	url: '/echo/html/',
-		// 	success: function(data) {
-		// 		alert('request complete')
-		// 	}
-		// })
-	).then( function(){
-		alert('all complete');
+			url: newURLmq,
+			method: "GET"
+		}).done(function(dataMQ){
+			// sift through JSON data to retreive objects to attach
+			var shortCut = dataMQ.results[0].locations[0].latLng;
+			console.log(shortCut);
+
+			lati = shortCut.lat;
+			long = shortCut.lng;
+
+			console.log(lati);
+			console.log(long);
+
+			test();
+			// Empty Form Values
+			$('#locaInput').val(' ');
+			});
+	};
+
+
+	function test (){
+		console.log(lati);
+		console.log(long);
+	};
+
+// Main Processes
+    // On click event
+	$('#submit-button').on('click', function(e){
+		e.preventDefault();
+		// Collect data from form using IDs
+			//genreInput  = $('# ').val().trim();                                         // Get ID from html
+			locInput  	= $('#locaInput').val().trim();
+			//radiusInput = $('# ').val().trim();                                         // Get ID from html
+		// Update URL MQ
+				var newURLmq = baseURLmq + "&location=" + locInput;
+				console.log(newURLmq);
+        // if (parseInt(radius)){                                                       // Data Check
+        //     newURLTM = newURLTM + '&genre =' + radius;                               // Data Check
+        // }
+     
+        runQueryMQ(newURLmq);
+        return false;
+
 	});
-});
 
-// End of Ajax Request		
-
-
-// Get AJAX call for ticketmaster to get events and locations
-// Using Jquery create an onclick event listener (to retrieve user inputs)
-// create flow to manipulate data from JSON
-// dynamically generate html content
-// post data onto the html
-
-//alert("click");
-
-	// var artist = $("#artist").val().trim();
-	// var venue = $("#venue").val().trim();
-	// var ticketSales = $("#ticket-sales").val().trim();
-	// var timeDate = $("#time-date").val().trim();
+test();
 
 
-	// console.log(artist);
-	// console.log(venue);
-	// console.log(ticketSales);
-	// console.log(timeDate);
 
-    // $(function () {
-    //     $('[data-toggle="tooltip"]').tooltip()
-    //   })
+        
 
-	
+
