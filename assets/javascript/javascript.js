@@ -17,50 +17,41 @@
 // 	var timeDate = $("#time-date").val().trim();
 
 
-// 	console.log(artist);
-// 	console.log(venue);
-// 	console.log(ticketSales);
-// 	console.log(timeDate);
 
-//     $(function () {
-//         $('[data-toggle="tooltip"]').tooltip()
-//       })
-$("#submit-button").on('click'), function(e){
+$("#submit-button").on('click', function (e) {
 	e.preventDefault()
 	var queryParams = {
-		classificationName: "",
-		city: "",
-		stateCode: "",
-		apiKey: "U2uyEsPGavnqxKAoaEf7KohDoHPNsEhV"
+		classificationName: $("#genre").val().trim(),
+		city: $("#cityName").val().trim(),
+		stateCode: $("#stateCode").val().trim(),
+		apiKeyTM: "U2uyEsPGavnqxKAoaEf7KohDoHPNsEhV",
+		apiKeyMp: "wd58REXOMx1iWtM5reOp71waaBO1BxAc"
 	};
-	 
-		var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey="+queryParams.apiKey+"&classificationName="+classificationName+"&city="+city+"&stateCode"+stateCode;
-		$.ajax({
-			url: queryURL,
-			method: "GET"
-		}).then(function (response) {
-			// var genres = response.segment._embedded.genres;
-			// for (var i=0; i<genres.length; i++){
-			// 	console.log(i+": "+genres[i].name);
-			// }
-			console.log(response);
-		});
-	};
-
+	var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=" + queryParams.apiKeyTM + "&classificationName=" + queryParams.classificationName + "&city=" + queryParams.city + "&stateCode=" + queryParams.stateCode;
+	console.log(queryURL)
+	$.ajax({
+		url: queryURL,
+		method: "GET"
+	}).then(function (response) {
+		console.log(response);
+		var events = response._embedded.events;
+		for (var i = 0; i < events.length; i++) {
+			var col1 = $("<td>").text(events[i].name);
+			var col2 = $("<td>").text(events[i]._embedded.venues[0].name);
+			var col3 = $("<td>").text("$" + events[i].priceRanges[0].min + " - $" + events[i].priceRanges[0].max);
+			var col4 = $("<td>").text(moment(events[i].dates.start.dateTime, "YYYYMMDD").format("LLLL"));
+			var tr = $("<tr>").append(col1, col2, col3, col4);
+			$("#concert-body").append(tr);
+		}
+	});
+	// var queryURL2 = "http://www.mapquestapi.com/directions/v2/route?key="+apiKeyMp;
 	// $.ajax({
-	// 	type:"GET",
-	// 	url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=U2uyEsPGavnqxKAoaEf7KohDoHPNsEhV+&classificationName",
-	// 	async:true,
-	// 	dataType: "json",
-	// 	success: function(json) {
-	// 				console.log(json);
-	// 				// Parse the response.
-	// 				// Do other things.
-	// 			 }
-		
-	//   });
-	
-
+	// 	url: queryURL2,
+	// 	Method: "GET"
+	// }).then(function(response){
+	// 	console.log(response)
+	// })
+});
   // Grab text the user typed into the search input, add to the queryParams object
 //   queryParams.q = $("#search-genre")
 //     .val()

@@ -23,8 +23,6 @@
 
 	<script src="https://use.fontawesome.com/abd289e58f.js"></script>
 
-	<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
-
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -52,7 +50,7 @@
 					<div class="card-body text-white">
 						<h1 class="card-title text-center">Concert Locator</h1>
 						<h5 class="card-text"></h5>
-						<!--<button type="button" class="text-center btn btn-lg signIn">Sign in with Google</button>-->
+
 					</div>
 				</div>
 			</div>
@@ -67,6 +65,7 @@
 					<div class="card-body">
 						<table class="table table-hover table-responsive-md">
 							<thead>
+								<!-- this is our table row data that we will populate using jquery -->
 								<tr>
 									<th scope="col"></th>
 									<th scope="col">Artist<i class="fa fa-question-circle" aria-hidden="true"
@@ -75,16 +74,15 @@
 									<th scope="col">Venue <i class="fa fa-question-circle" aria-hidden="true"
 											data-toggle="tooltip" data-placement="top"
 											title="The location of the performance."></i></th>
-									<th scope="col">Ticket Sales (min) <i class="fa fa-question-circle"
+									<th scope="col">Ticket Price (min-max) <i class="fa fa-question-circle"
 											aria-hidden="true" data-toggle="tooltip" data-placement="top"
 											title="When tickets will be on sale."></i></th>
 									<th scope="col">Date/Time <i class="fa fa-question-circle" aria-hidden="true"
 											data-toggle="tooltip" data-placement="top"
 											title="Date and time of the concert."></i></th>
-
 								</tr>
 							</thead>
-							<tbody id="schedule-body">
+							<tbody id="concert-body">
 							</tbody>
 						</table>
 					</div>
@@ -101,10 +99,10 @@
 					<div class="card-body">
 						<form>
 							<div class="form-group">
-								<label id="genre" for="genre">Genre <i class="fa fa-question-circle" aria-hidden="true"
+								<label for="genre">Genre <i class="fa fa-question-circle" aria-hidden="true"
 										data-toggle="tooltip" data-placement="top"
 										title="Genre preference."></i></label>
-								<input type="text" class="form-control" id="train-name">
+								<input type="text" class="form-control" id="genre">
 								<!-- Add a dropdown menu for Genre -->
 							</div>
 							<div class="form-group">
@@ -135,7 +133,7 @@
 
 							<p id="missing-field" class="form-validation"></p>
 							<button type="submit" class="btn btn-primary rounded" id="submit-button"
-								data-toggle="modal">Add to schedule</button>
+								data-toggle="modal">Search</button>
 
 
 							<div class="modal" id="addTrain" tabindex="-1" role="dialog">
