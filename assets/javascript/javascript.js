@@ -1,72 +1,72 @@
-// Create Global variables
-	// Map Quest Basic URL
-	var apiKeyMQ  = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
-	var baseURLmq = "http://www.mapquestapi.com/geocoding/v1/address?key=" + apiKeyMQ;
+// // Create Global variables
+// 	// Map Quest Basic URL
+// 	var apiKeyMQ  = '1QcKDgO4zah2cBGwW7zgF6gK8sNas4iyc';
+// 	var baseURLmq = "http://www.mapquestapi.com/geocoding/v1/address?key=" + apiKeyMQ;
 
-	// TM Quest Basic URL
-	// var apiKeyTM = ' ';
-	// var apiKeyTM = ' '; 
+// 	// TM Quest Basic URL
+// 	// var apiKeyTM = ' ';
+// 	// var apiKeyTM = ' '; 
 
-	//Search Parameters
-	// var genreInput  = ' ';
-	var lati = ' ';
-	var long = ' ';
-	var locInput 	= ' ';
-	// var radiusInput = 0;
+// 	//Search Parameters
+// 	// var genreInput  = ' ';
+// 	var lati = ' ';
+// 	var long = ' ';
+// 	var locInput 	= ' ';
+// 	// var radiusInput = 0;
 
-// build url to query the API
-// Get AJAX call for MapQuest to get geolocation
+// // build url to query the API
+// // Get AJAX call for MapQuest to get geolocation
 
-//ALEX IS WORKING ON MAPQUEST API   "KEEP HERE IN CASE WE NEED TO DO SEPARATE AJAX REQUESTS"
+// //ALEX IS WORKING ON MAPQUEST API   "KEEP HERE IN CASE WE NEED TO DO SEPARATE AJAX REQUESTS"
 
-	// Create local vars to capture hard test building URL
-	// Location Input (locInput) can be address, zipcode, city-state, state 
-	function runQueryMQ(newURLmq){
-		$.ajax({
-			url: newURLmq,
-			method: "GET"
-		}).done(function(dataMQ){
-			// sift through JSON data to retreive objects to attach
-			var shortCut = dataMQ.results[0].locations[0].latLng;
-			console.log(shortCut);
+// 	// Create local vars to capture hard test building URL
+// 	// Location Input (locInput) can be address, zipcode, city-state, state 
+// 	function runQueryMQ(newURLmq){
+// 		$.ajax({
+// 			url: newURLmq,
+// 			method: "GET"
+// 		}).done(function(dataMQ){
+// 			// sift through JSON data to retreive objects to attach
+// 			var shortCut = dataMQ.results[0].locations[0].latLng;
+// 			console.log(shortCut);
 
-			lati = shortCut.lat;
-			long = shortCut.lng;
+// 			lati = shortCut.lat;
+// 			long = shortCut.lng;
 
-			console.log(lati);
-			console.log(long);
+// 			console.log(lati);
+// 			console.log(long);
 
-			test();
-			// Empty Form Values
-			$('#locaInput').val(' ');
-			});
-	};
+// 			test();
+// 			// Empty Form Values
+// 			$('#locaInput').val(' ');
+// 			});
+// 	};
 
 
-	function test (){
-		console.log(lati);
-		console.log(long);
-	};
+// 	function test (){
+// 		console.log(lati);
+// 		console.log(long);
+// 	};
 
-// Main Processes
-    // On click event
-	$('#submit-button').on('click', function(e){
-		e.preventDefault();
-		// Collect data from form using IDs
-			//genreInput  = $('# ').val().trim();                                         // Get ID from html
-			locInput  	= $('#locaInput').val().trim();
-			//radiusInput = $('# ').val().trim();                                         // Get ID from html
-		// Update URL MQ
-				var newURLmq = baseURLmq + "&location=" + locInput;
-				console.log(newURLmq);
-        // if (parseInt(radius)){                                                       // Data Check
-        //     newURLTM = newURLTM + '&genre =' + radius;                               // Data Check
-        // }
+// // Main Processes
+//     // On click event
+// 	$('#submit-button').on('click', function(e){
+// 		e.preventDefault();
+// 		// Collect data from form using IDs
+// 			//genreInput  = $('# ').val().trim();                                         // Get ID from html
+// 			locInput  	= $('#locaInput').val().trim();
+// 			//radiusInput = $('# ').val().trim();                                         // Get ID from html
+// 		// Update URL MQ
+// 				var newURLmq = baseURLmq + "&location=" + locInput;
+// 				console.log(newURLmq);
+//         // if (parseInt(radius)){                                                       // Data Check
+//         //     newURLTM = newURLTM + '&genre =' + radius;                               // Data Check
+//         // }
      
-        runQueryMQ(newURLmq);
-        return false;
+//         runQueryMQ(newURLmq);
+//         return false;
 
-	});
+// 	});
 
 
 
@@ -94,6 +94,9 @@ $("#submit-button").on('click', function (e) {
 	}).then(function (response) {
 		console.log(response);
 		var events = response._embedded.events;
+		// Address Search
+		console.log(events._embedded.venues.address);
+
 		for (var i = 0; i < events.length; i++) {
 			var col1 = $("<td>").text(events[i].name);
 			var col2 = $("<td>").text(events[i]._embedded.venues[0].name);
