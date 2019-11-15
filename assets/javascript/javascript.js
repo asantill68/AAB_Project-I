@@ -75,11 +75,6 @@
 // 	var ticketSales = $("#ticket-sales").val().trim();
 // 	var timeDate = $("#time-date").val().trim();
 
-<<<<<<< HEAD
-        
-
-
-=======
 
 
 $("#submit-button").on('click', function (e) {
@@ -122,4 +117,3 @@ $("#submit-button").on('click', function (e) {
 //     .trim();
 // 	  }
 
->>>>>>> patch-4
