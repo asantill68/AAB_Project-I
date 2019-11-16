@@ -9,3 +9,6 @@ label {
 .table-header{
 	font-weight: bold;
 }
+thead{
+	padding: 0px;
+}

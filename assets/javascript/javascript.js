@@ -1,11 +1,7 @@
-// // Create Global variables
-// Map Quest Basic URL
-var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
-var baseURLmq = "http://www.mapquestapi.com/directions/v2/route?key=" + mapQuestKey;
-
-// 	// TM Quest Basic URL
-// 	// var apiKeyTM = ' ';
-// 	// var apiKeyTM = ' ';
+	// // Create Global variables
+	// Map Quest Basic URL
+	var mapQuestKey = 'RQ7XoE86cJwEAlzp98Ab2QXty8rv3JTc';
+	var baseURLmq = "http://www.mapquestapi.com/directions/v2/route?key=" + mapQuestKey;
 
 	// Global vars for Origin Address
 	var orgAddress1 = ' ';
@@ -40,7 +36,7 @@ $("#submit-button").on('click', function (e) {
 	var orgAddress 	= orgAddress1 + orgAddress2 + orgAddress3 + orgAddress4;
 
 	//var orgAddress = orgAddress1 + city + stateCode + postalCode;
-	//console.log(orgAddress);
+	console.log(orgAddress);
 
 	$.ajax({
 		url: queryURL,
@@ -65,7 +61,7 @@ $("#submit-button").on('click', function (e) {
 		var venAddress3 = events[i]._embedded.venues[0].state.stateCode;
 		var venAddress4 = events[i]._embedded.venues[0].postalCode;
 		var venAddress = venAddress1 + venAddress2 + venAddress3 + venAddress4;
-		console.log(venAddress);
+		//console.log(venAddress);
 		}
 
 		for (var i = 0; i < events.length; i++) {
@@ -78,9 +74,9 @@ $("#submit-button").on('click', function (e) {
 			// Create a button to trigger second ajax request
 			var dirB = $("<button class='ajax2'>");
 			// Add a class to button to hold
-
+			var buttonP = $("<p>").text('Directions');
 			// Append Venue address to Button
-			dirB.append('Directions'); 
+			dirB.append(buttonP); 
 
 			var col1 = $("<td>").text(events[i].name);
 			var col2 = $("<td>").text(events[i]._embedded.venues[0].name);
@@ -97,14 +93,17 @@ $("#submit-button").on('click', function (e) {
 	$("#cityName").val(' ');
 	$("#stateCode").val(' ');
 	$("#userZip").val(' ');
+	// Empty the Previous Search
+	$("#concert-body").val(' ');
 });
 
 // MapQuest Ajax request for Directions
 $('.ajax2').on('click', function(orgAddress, venAddress){
-    
+	
+	console.log(orgAddress);
 	//event.preventDefault();
 
-	var venAddress = $(this).data(".ajax2");
+	var venAddress = $(this).data();
 	// Create local vars to capture hard test building URL
 	var queryURLmq =  baseURLmq + "&from=" + orgAddress + "&to=" + venAddress;
 		console.log(queryURLmq);
