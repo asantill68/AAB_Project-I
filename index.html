@@ -35,9 +35,9 @@
 		integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
 		crossorigin="anonymous"></script>
 
-	<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-	<script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+	<!-- <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" /> -->
+	<!-- <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script> -->
 
 </head>
 
@@ -84,6 +84,10 @@
 							</thead>
 							<tbody id="concert-body">
 							</tbody>
+							<!-- New Div to Display Directions -->
+							<div class="text-center">
+								<p id="dirDisplay"></p>
+							</div>
 						</table>
 					</div>
 				</div>
@@ -117,6 +121,13 @@
 								<input type="text" class="form-control" id="genre">
 								<!-- Add a dropdown menu for Genre -->
 							</div>
+							<!-- Add an Address Input -->
+							<div class="form-group">
+								<label for="location">Nearest Address <i class="fa fa-question-circle" aria-hidden="true"
+										data-toggle="tooltip" data-placement="top"
+										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+								<input type="text" class="form-control" id="address">
+							</div>
 							<div class="form-group">
 								<label for="location">City <i class="fa fa-question-circle" aria-hidden="true"
 										data-toggle="tooltip" data-placement="top"
@@ -124,7 +135,7 @@
 								<input type="text" class="form-control" id="cityName">
 							</div>
 							<div class="form-group">
-								<label for="location">State <i class="fa fa-question-circle" aria-hidden="true"
+								<label for="location">State Code (TX, NY etc.) <i class="fa fa-question-circle" aria-hidden="true"
 										data-toggle="tooltip" data-placement="top"
 										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
 								<input type="text" class="form-control" id="stateCode">
@@ -135,13 +146,13 @@
 										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
 								<input type="text" class="form-control" id="userZip">
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label for="radius">Radius<i class="fa fa-question-circle" aria-hidden="true"
 										data-toggle="tooltip" data-placement="top"
 										title="Distance from your location that you're willing to travel."></i></label>
 								<small id="not-military-time" class="form-validation"></small>
 								<input type="text" class="form-control" id="travelRadius">
-							</div>
+							</div> -->
 
 							<p id="missing-field" class="form-validation"></p>
 							<button type="submit" class="btn btn-primary rounded" id="submit-button"
