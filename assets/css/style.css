@@ -9,6 +9,9 @@ label {
 .table-header{
 	font-weight: bold;
 }
-thead{
+thead th{
 	padding: 0px;
+	white-space: nowrap;
+	padding-right: 25px;
+	
 }

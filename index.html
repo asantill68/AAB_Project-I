@@ -67,151 +67,126 @@
 							<thead>
 								<!-- this is our table row data that we will populate using jquery -->
 								<tr>
-									<th scope="col"></th>
-									<th scope="col">Artist<i class="fa fa-question-circle" aria-hidden="true"
-											data-toggle="tooltip" data-placement="top"
-											title="The performing artist."></i></th>
-									<th scope="col">Venue <i class="fa fa-question-circle" aria-hidden="true"
-											data-toggle="tooltip" data-placement="top"
-											title="The location of the performance."></i></th>
-									<th scope="col">Ticket Price (min-max) <i class="fa fa-question-circle"
-											aria-hidden="true" data-toggle="tooltip" data-placement="top"
-											title="When tickets will be on sale."></i></th>
-									<th scope="col">Date/Time <i class="fa fa-question-circle" aria-hidden="true"
-											data-toggle="tooltip" data-placement="top"
-											title="Date and time of the concert."></i></th>
+									<div class="heading-title">
+										<th scope="col"></th>
+										<th scope="col">Artist<i class="fa fa-question-circle" aria-hidden="true"
+												data-toggle="tooltip" data-placement="top"
+												title="The performing artist."></i></th>
+										<th scope="col">Venue <i class="fa fa-question-circle" aria-hidden="true"
+												data-toggle="tooltip" data-placement="top"
+												title="The location of the performance."></i></th>
+										<th scope="col">Ticket Price (min-max) <i class="fa fa-question-circle"
+												aria-hidden="true" data-toggle="tooltip" data-placement="top"
+												title="When tickets will be on sale."></i></th>
+										<th scope="col">Date/Time <i class="fa fa-question-circle" aria-hidden="true"
+												data-toggle="tooltip" data-placement="top"
+												title="Date and time of the concert."></i></th>
 								</tr>
 							</thead>
-							<tbody id="concert-body">
-							</tbody>
-							<!-- New Div to Display Directions -->
-							<div class="text-center">
-								<p id="dirDisplay"></p>
-							</div>
-						</table>
+					</div>
+					<tbody id="concert-body">
+					</tbody>
+					<!-- New Div to Display Directions -->
+				</table>
+				<div class="text-center">
+						<p id="dirDisplay"></p>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row content">
+		<div class="col-md-12">
+			<div class="card border border-primary">
+				<div class="card-header bg-primary text-white">
+					<h5> Add Preferences and Location</h5>
+				</div>
+				<!-- Input Your Preferances Section button id = "submit-button" -->
+				<div class="card-body">
+					
+					<br>
+					<form>
+						<div class="form-group">
+							<label for="genre">Genre <i class="fa fa-question-circle" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top" title="Genre preference."></i></label>
+							<input type="text" class="form-control" id="genre">
+							<!-- Add a dropdown menu for Genre -->
+						</div>
+						<!-- Add an Address Input -->
+						<div class="form-group">
+							<label for="location">Nearest Address <i class="fa fa-question-circle" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+							<input type="text" class="form-control" id="address">
+						</div>
+						<div class="form-group">
+							<label for="location">City <i class="fa fa-question-circle" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+							<input type="text" class="form-control" id="cityName">
+						</div>
+						<div class="form-group">
+							<label for="location">State Code (TX, NY etc.) <i class="fa fa-question-circle"
+									aria-hidden="true" data-toggle="tooltip" data-placement="top"
+									title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+							<input type="text" class="form-control" id="stateCode">
+						</div>
+						<div class="form-group">
+							<label for="location">Zip Code <i class="fa fa-question-circle" aria-hidden="true"
+									data-toggle="tooltip" data-placement="top"
+									title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
+							<input type="text" class="form-control" id="userZip">
+						</div>
 
-		<div class="row content">
-			<div class="col-md-12">
-				<div class="card border border-primary">
-					<div class="card-header bg-primary text-white">
-						<h5> Add Preferences and Location</h5>
-					</div>
-					<!-- Input Your Preferances Section button id = "submit-button" -->
-					<div class="card-body">
-							<!-- <div class="dropdown">
-									<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Genre
-									<span class="caret"></span></button>
-									<ul class="dropdown-menu">
-									  <li><a href="#">Pop</a></li>
-									  <li><a href="#">Rock</a></li>
-									  <li><a href="#">Hip Hop</a></li>
-									  <li><a href="#">Country</a></li>
-									</ul>
-								  </div> -->
-								  <br>
-						<form>
-							<div class="form-group">
-								<label for="genre">Genre <i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="Genre preference."></i></label>
-								<input type="text" class="form-control" id="genre">
-								<!-- Add a dropdown menu for Genre -->
-							</div>
-							<!-- Add an Address Input -->
-							<div class="form-group">
-								<label for="location">Nearest Address <i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-								<input type="text" class="form-control" id="address">
-							</div>
-							<div class="form-group">
-								<label for="location">City <i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-								<input type="text" class="form-control" id="cityName">
-							</div>
-							<div class="form-group">
-								<label for="location">State Code (TX, NY etc.) <i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-								<input type="text" class="form-control" id="stateCode">
-							</div>
-							<div class="form-group">
-								<label for="location">Zip Code <i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="The location to where the train is traveling to. For example, Chicago, IL."></i></label>
-								<input type="text" class="form-control" id="userZip">
-							</div>
-							<!-- <div class="form-group">
-								<label for="radius">Radius<i class="fa fa-question-circle" aria-hidden="true"
-										data-toggle="tooltip" data-placement="top"
-										title="Distance from your location that you're willing to travel."></i></label>
-								<small id="not-military-time" class="form-validation"></small>
-								<input type="text" class="form-control" id="travelRadius">
-							</div> -->
-
-							<p id="missing-field" class="form-validation"></p>
-							<button type="submit" class="btn btn-primary rounded" id="submit-button"
-								data-toggle="modal">Search</button>
-
-
-							<div class="modal" id="addTrain" tabindex="-1" role="dialog">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header bg-primary">
-											<h5 class="modal-title text-white">Train successfully added.</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="add-train-modal ml-3 mt-3">
-										</div>
-										<div class="modal-footer">
-											<button id="submit-button" type="button" class="btn btn-secondary"
-												data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-
-
-						<div class="modal" id="removeTrain" tabindex="-1" role="dialog">
+						<p id="missing-field" class="form-validation"></p>
+						<button type="submit" class="btn btn-primary rounded" id="submit-button"
+							data-toggle="modal">Search</button>
+						<div class="modal" id="addTrain" tabindex="-1" role="dialog">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header bg-primary">
-										<h5 class="modal-title text-white">Are you sure you want to remove this train?
-										</h5>
+										<h5 class="modal-title text-white">Train successfully added.</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
-									<div class="remove-train-modal ml-3 mt-3">
+									<div class="add-train-modal ml-3 mt-3">
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal"
-											id="remove-train-btn">Remove</button>
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Cancel</button>
+										<button id="submit-button" type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
 									</div>
 								</div>
 							</div>
 						</div>
-
+					</form>
+					<div class="modal" id="removeTrain" tabindex="-1" role="dialog">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header bg-primary">
+									<h5 class="modal-title text-white">Are you sure you want to remove this train?
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="remove-train-modal ml-3 mt-3">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal"
+										id="remove-train-btn">Remove</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-
-
 		</div>
+	</div>
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="assets/javascript/javascript.js"></script>
-
 </body>
 
 </html>
